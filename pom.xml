@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.hartveld.stream.reactive</groupId>
+	<artifactId>reactive-stream-swing</artifactId>
+	<version>0.1-SNAPSHOT</version>
+	<name>Hartveld.COM - Reactive Stream - Swing support</name>
+
+	<properties>
+		<version.java>1.8</version.java>
+		<version.maven>3.0.5</version.maven>
+
+		<version.dep.slf4j>1.7.4</version.dep.slf4j>
+		<version.dep.logback>1.0.10</version.dep.logback>
+		<version.dep.guava>14.0.1</version.dep.guava>
+		<version.dep.apache.commons-lang>2.6</version.dep.apache.commons-lang>
+		<version.dep.apache.commons-lang3>3.1</version.dep.apache.commons-lang3>
+
+		<version.dep.hartveld.reactive.stream>0.1-SNAPSHOT</version.dep.hartveld.reactive.stream>
+
+		<version.dep.junit>4.11</version.dep.junit>
+		<version.dep.hamcrest>1.3</version.dep.hamcrest>
+		<version.dep.mockito>1.9.5</version.dep.mockito>
+
+		<version.plugin.compiler.java>3.0</version.plugin.compiler.java>
+		<version.plugin.surefire>2.14</version.plugin.surefire>
+		<version.plugin.jar>2.4</version.plugin.jar>
+		<version.plugin.source>2.2.1</version.plugin.source>
+		<version.plugin.javadoc>2.9</version.plugin.javadoc>
+		<version.plugin.site>3.2</version.plugin.site>
+		<version.plugin.project-info-reports>2.6</version.plugin.project-info-reports>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<prerequisites>
+		<maven>${version.maven}</maven>
+	</prerequisites>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${version.dep.slf4j}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${version.dep.logback}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${version.dep.guava}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${version.dep.apache.commons-lang}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${version.dep.apache.commons-lang3}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hartveld.stream.reactive</groupId>
+			<artifactId>reactive-stream</artifactId>
+			<version>${version.dep.hartveld.reactive.stream}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.dep.junit}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>${version.dep.hamcrest}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${version.dep.mockito}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.hamcrest</groupId>
+					<artifactId>hamcrest-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.plugin.compiler.java}</version>
+				<configuration>
+					<source>${version.java}</source>
+					<target>${version.java}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.plugin.surefire}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${version.plugin.jar}</version>
+				<executions>
+					<execution>
+						<id>attach-test-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${version.plugin.source}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>attach-test-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>test-jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${version.plugin.javadoc}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>attach-test-javadocs</id>
+						<phase>package</phase>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>${version.plugin.site}</version>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<reporting>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${version.plugin.project-info-reports}</version>
+			</plugin>
+
+		</plugins>
+
+	</reporting>
+
+</project>
