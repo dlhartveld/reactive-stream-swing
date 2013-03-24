@@ -8,6 +8,7 @@ import com.hartveld.stream.reactive.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
+import javax.swing.JButton;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +52,19 @@ public class ActionEventSubjectTest {
 		verify(button).removeActionListener(listener.getValue());
 
 		verifyNoMoreInteractions(button, observer);
+	}
+
+	@Test
+	public void testThatObserverIsNotifiedOfButtonClick() throws Exception {
+		button = new JButton();
+
+		subject = new ActionEventSubject(button);
+		subject.subscribe(observer);
+
+		button.doClick();
+
+		verify(observer).onNext(any(ActionEvent.class));
+		verifyNoMoreInteractions(observer);
 	}
 
 }
