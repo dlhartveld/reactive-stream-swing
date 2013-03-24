@@ -1,5 +1,6 @@
-package com.hartveld.stream.reactive.swing;
+package com.hartveld.stream.reactive.awt;
 
+import com.hartveld.stream.reactive.awt.WindowClosingEventSubject;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;

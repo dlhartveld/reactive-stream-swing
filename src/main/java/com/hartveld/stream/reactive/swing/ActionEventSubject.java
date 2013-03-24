@@ -1,16 +1,16 @@
 package com.hartveld.stream.reactive.swing;
 
-import com.hartveld.stream.reactive.subjects.EventSubject;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.hartveld.stream.reactive.Observer;
+import com.hartveld.stream.reactive.subjects.EventSubject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ActionEventSubject extends EventSubject<ActionEvent, ActionListener> {
+class ActionEventSubject extends EventSubject<ActionEvent, ActionListener> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ActionEventSubject.class);
 

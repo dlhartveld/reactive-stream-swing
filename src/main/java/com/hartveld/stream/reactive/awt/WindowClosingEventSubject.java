@@ -1,4 +1,4 @@
-package com.hartveld.stream.reactive.swing;
+package com.hartveld.stream.reactive.awt;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
