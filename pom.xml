@@ -12,8 +12,8 @@
 		<version.java>1.8</version.java>
 		<version.maven>3.0.5</version.maven>
 
-		<version.dep.slf4j>1.7.4</version.dep.slf4j>
-		<version.dep.logback>1.0.10</version.dep.logback>
+		<version.dep.slf4j>1.7.5</version.dep.slf4j>
+		<version.dep.logback>1.0.11</version.dep.logback>
 		<version.dep.guava>14.0.1</version.dep.guava>
 		<version.dep.apache.commons-lang>2.6</version.dep.apache.commons-lang>
 		<version.dep.apache.commons-lang3>3.1</version.dep.apache.commons-lang3>
