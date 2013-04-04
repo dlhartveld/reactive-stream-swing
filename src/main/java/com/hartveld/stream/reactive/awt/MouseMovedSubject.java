@@ -2,7 +2,6 @@ package com.hartveld.stream.reactive.awt;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.hartveld.stream.reactive.Observable;
 import com.hartveld.stream.reactive.Observer;
 import com.hartveld.stream.reactive.subjects.EventSubject;
 import java.awt.Component;
@@ -12,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class MouseMovedSubject extends EventSubject<MouseEvent, MouseMotionListener> implements Observable<MouseEvent> {
+class MouseMovedSubject extends EventSubject<MouseEvent, MouseMotionListener> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MouseMovedSubject.class);
 
