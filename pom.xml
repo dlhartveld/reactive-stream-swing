@@ -18,6 +18,7 @@
 		<version.dep.apache.commons-lang>2.6</version.dep.apache.commons-lang>
 		<version.dep.apache.commons-lang3>3.1</version.dep.apache.commons-lang3>
 
+		<version.dep.hartveld.commons>0.1-SNAPSHOT</version.dep.hartveld.commons>
 		<version.dep.hartveld.reactive.stream>0.1-SNAPSHOT</version.dep.hartveld.reactive.stream>
 
 		<version.dep.junit>4.11</version.dep.junit>
@@ -102,6 +103,13 @@
 					<artifactId>hamcrest-core</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hartveld.commons.test</groupId>
+			<artifactId>swing</artifactId>
+			<version>${version.dep.hartveld.commons}</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
