@@ -16,14 +16,14 @@ class ActionEventSubject extends EventSubject<ActionEvent, ActionListener> {
 
 	private final AbstractButton button;
 
-	public ActionEventSubject(final AbstractButton button) {
+	ActionEventSubject(final AbstractButton button) {
 		checkNotNull(button, "button");
 
 		this.button = button;
 	}
 
 	@Override
-	protected ActionListener onSubscribe(final Observer<ActionEvent> observer) {
+	protected ActionListener onSubscribe(final Observer<? super ActionEvent> observer) {
 		LOG.trace("onSubscribe(): {}", observer);
 
 		final ActionListener listener = e -> onNext(e);

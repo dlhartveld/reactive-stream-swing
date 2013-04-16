@@ -8,7 +8,7 @@ public class WindowEvents {
 
 	public final Observable<WindowEvent> closing;
 
-	public WindowEvents(Window window) {
+	public WindowEvents(final Window window) {
 		this.closing = new WindowClosingEventSubject(window);
 	}
 

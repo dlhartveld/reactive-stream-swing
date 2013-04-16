@@ -11,20 +11,20 @@ import java.awt.event.WindowListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WindowClosingEventSubject extends EventSubject<WindowEvent, WindowListener> {
+class WindowClosingEventSubject extends EventSubject<WindowEvent, WindowListener> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WindowClosingEventSubject.class);
 
 	private final Window window;
 
-	public WindowClosingEventSubject(final Window window) {
+	WindowClosingEventSubject(final Window window) {
 		checkNotNull(window, "window");
 
 		this.window = window;
 	}
 
 	@Override
-	protected WindowListener onSubscribe(final Observer<WindowEvent> observer) {
+	protected WindowListener onSubscribe(final Observer<? super WindowEvent> observer) {
 		LOG.trace("onSubscribe(): {}", observer);
 
 		checkNotNull(observer, "observer");

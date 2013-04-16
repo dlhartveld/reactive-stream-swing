@@ -14,15 +14,15 @@ public class ReactiveFrame extends JFrame {
 		super();
 	}
 
-	public ReactiveFrame(String title) {
+	public ReactiveFrame(final String title) {
 		super(title);
 	}
 
-	public ReactiveFrame(GraphicsConfiguration gc) {
+	public ReactiveFrame(final GraphicsConfiguration gc) {
 		super(gc);
 	}
 
-	public ReactiveFrame(String title, GraphicsConfiguration gc) {
+	public ReactiveFrame(final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
 	}
 

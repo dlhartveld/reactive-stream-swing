@@ -8,7 +8,7 @@ public class ComponentEvents {
 
 	public final MouseEvents mouseEvents;
 
-	public ComponentEvents(Component component) {
+	public ComponentEvents(final Component component) {
 		this.mouseEvents = new MouseEvents(component);
 	}
 
@@ -17,7 +17,7 @@ public class ComponentEvents {
 		public final Observable<MouseEvent> moved;
 		public final Observable<MouseEvent> dragged;
 
-		private MouseEvents(Component component) {
+		private MouseEvents(final Component component) {
 			this.moved = new MouseMovedSubject(component);
 			this.dragged = new MouseDraggedSubject(component);
 		}

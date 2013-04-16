@@ -17,19 +17,19 @@ class MouseMovedSubject extends EventSubject<MouseEvent, MouseMotionListener> {
 
 	private final Component component;
 
-	public MouseMovedSubject(Component component) {
+	MouseMovedSubject(final Component component) {
 		checkNotNull(component, "component");
 
 		this.component = component;
 	}
 
 	@Override
-	protected MouseMotionListener onSubscribe(Observer<MouseEvent> observer) {
+	protected MouseMotionListener onSubscribe(final Observer<? super MouseEvent> observer) {
 		LOG.trace("onSubscribe(): {}", observer);
 
 		final MouseMotionAdapter listener = new MouseMotionAdapter() {
 			   @Override
-			   public void mouseMoved(MouseEvent event) {
+			   public void mouseMoved(final MouseEvent event) {
 				   checkNotNull(event, "event");
 
 				   onNext(event);
@@ -42,7 +42,7 @@ class MouseMovedSubject extends EventSubject<MouseEvent, MouseMotionListener> {
 	}
 
 	@Override
-	protected void onClose(MouseMotionListener source) {
+	protected void onClose(final MouseMotionListener source) {
 		LOG.trace("onClose(): {}", source);
 
 		component.removeMouseMotionListener(source);
