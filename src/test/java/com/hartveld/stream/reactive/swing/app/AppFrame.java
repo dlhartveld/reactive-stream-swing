@@ -1,36 +1,35 @@
 package com.hartveld.stream.reactive.swing.app;
 
-import com.hartveld.stream.reactive.Observable;
-import com.hartveld.stream.reactive.swing.ReactiveButton;
-import com.hartveld.stream.reactive.swing.ReactiveFrame;
-import com.hartveld.stream.reactive.swing.ReactiveList;
-import com.hartveld.stream.reactive.swing.ReactiveListModel;
+import com.hartveld.stream.reactive.component.ReactiveButton;
+import com.hartveld.stream.reactive.component.ReactiveListModel;
+import com.hartveld.stream.reactive.swing.ReactiveSwingButton;
+import com.hartveld.stream.reactive.swing.ReactiveSwingFrame;
+import com.hartveld.stream.reactive.swing.ReactiveSwingList;
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-public class AppFrame extends ReactiveFrame {
+public class AppFrame extends ReactiveSwingFrame {
 
-	private final ReactiveButton button;
-	private final ReactiveList<String> list;
-
-	public final Observable<ActionEvent> go;
+	private final ReactiveSwingButton button;
+	private final ReactiveSwingList<String> list;
 
 	public AppFrame(final ReactiveListModel<String> model) {
 		super("App");
 
-		this.button = new ReactiveButton("Go!");
+		this.button = new ReactiveSwingButton("Go!");
 		this.button.setName("go");
 
-		this.list = new ReactiveList<>(model);
+		this.list = new ReactiveSwingList<>(model);
 		final JScrollPane scrollPane = new JScrollPane(this.list);
 
 		this.getContentPane().add(new JLabel("Hello, world!"), BorderLayout.WEST);
 		this.getContentPane().add(button, BorderLayout.EAST);
 		this.getContentPane().add(scrollPane, BorderLayout.SOUTH);
+	}
 
-		this.go = this.button.events;
+	public final ReactiveButton go() {
+		return this.button;
 	}
 
 }

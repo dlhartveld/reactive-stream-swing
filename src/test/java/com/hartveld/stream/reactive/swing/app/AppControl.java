@@ -2,19 +2,20 @@ package com.hartveld.stream.reactive.swing.app;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.hartveld.stream.reactive.component.ReactiveListModel;
 import com.hartveld.stream.reactive.concurrency.Schedulers;
+import com.hartveld.stream.reactive.swing.AbstractFrameControl;
 import com.hartveld.stream.reactive.swing.DefaultReactiveListModel;
-import com.hartveld.stream.reactive.swing.ReactiveListModel;
-import javax.swing.SwingUtilities;
+import com.hartveld.stream.reactive.swing.ReactiveSwingFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AppControl {
+public class AppControl extends AbstractFrameControl {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AppControl.class);
 
-	final AppFrame frame;
-	final ReactiveListModel<String> model;
+	public final AppFrame frame;
+	public final ReactiveListModel<String> model;
 
 	public AppControl(final RandomStringsService service) throws Exception {
 		checkNotNull(service, "service");
@@ -24,7 +25,7 @@ public class AppControl {
 		this.frame = new AppFrame(model);
 		//frame.setDefaultCloseOperation(AppFrame.EXIT_ON_CLOSE);
 
-		final AutoCloseable subscription = frame.go
+		final AutoCloseable subscription = frame.go().clicks()
 				.observeOn(Schedulers.DEFAULT)
 				.flatMap(click -> {
 					LOG.trace("Clearing model contents ...");
@@ -36,7 +37,7 @@ public class AppControl {
 				.observeOn(Schedulers.EDT)
 				.subscribe(model);
 
-		frame.window.closing
+		frame.window().closing()
 				.subscribe(event -> {
 					try {
 						subscription.close();
@@ -44,15 +45,9 @@ public class AppControl {
 				});
 	}
 
-	public void showFrame() throws Exception {
-		LOG.trace("Showing frame ...");
-
-		SwingUtilities.invokeAndWait(() -> {
-			frame.pack();
-			frame.setVisible(true);
-		});
-
-		LOG.trace("Frame visible.");
+	@Override
+	public final ReactiveSwingFrame frame() {
+		return this.frame;
 	}
 
 }

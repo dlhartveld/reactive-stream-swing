@@ -1,4 +1,4 @@
-package com.hartveld.stream.reactive.swing;
+package com.hartveld.stream.reactive.component;
 
 import com.hartveld.stream.reactive.Observer;
 import javax.swing.ListModel;

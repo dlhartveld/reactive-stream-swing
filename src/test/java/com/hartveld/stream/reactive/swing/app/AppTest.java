@@ -10,7 +10,7 @@ import static org.mockito.Mockito.when;
 import com.hartveld.commons.test.swing.AbstractSwingFrameTest;
 import com.hartveld.stream.reactive.Observable;
 import com.hartveld.stream.reactive.ObservableFactory;
-import com.hartveld.stream.reactive.swing.ReactiveButton;
+import com.hartveld.stream.reactive.swing.ReactiveSwingButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class AppTest extends AbstractSwingFrameTest {
 
 	private AppControl control;
 
-	private ReactiveButton button;
+	private ReactiveSwingButton button;
 
 	@Mock
 	private RandomStringsService service;
@@ -43,14 +43,14 @@ public class AppTest extends AbstractSwingFrameTest {
 
 		this.control = new AppControl(service);
 
-		return this.control.frame;
+		return this.control.frame();
 	}
 
 	@Override
 	protected void lookupComponents() {
 		LOG.trace("Looking up components ...");
 
-		this.button = lookup("go", ReactiveButton.class);
+		this.button = lookup("go", ReactiveSwingButton.class);
 	}
 
 	@Test
