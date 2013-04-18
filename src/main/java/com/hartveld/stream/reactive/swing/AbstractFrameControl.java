@@ -1,6 +1,8 @@
 package com.hartveld.stream.reactive.swing;
 
-import javax.swing.SwingUtilities;
+import static java.awt.EventQueue.isDispatchThread;
+
+import java.awt.EventQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +15,18 @@ public abstract class AbstractFrameControl {
 	public void showFrame() throws Exception {
 		LOG.trace("Showing frame ...");
 
-		SwingUtilities.invokeAndWait(() -> {
-			frame().pack();
-			frame().setVisible(true);
-		});
+		if (isDispatchThread()) {
+			doShowFrame();
+		} else {
+			EventQueue.invokeAndWait(() -> doShowFrame());
+		}
 
 		LOG.trace("Frame visible.");
+	}
+
+	private void doShowFrame() {
+		frame().pack();
+		frame().setVisible(true);
 	}
 
 }

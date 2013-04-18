@@ -7,4 +7,8 @@ public interface ReactiveButton {
 
 	Observable<ActionEvent> clicks();
 
+	void setEnabled(boolean value);
+
+	void doClick();
+
 }

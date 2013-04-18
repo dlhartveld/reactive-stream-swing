@@ -1,9 +1,9 @@
 package com.hartveld.stream.reactive.swing;
 
-import com.hartveld.stream.reactive.component.ReactiveListModel;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.hartveld.stream.reactive.component.ReactiveListModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
