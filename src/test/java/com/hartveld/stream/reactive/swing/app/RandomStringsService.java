@@ -1,7 +1,7 @@
 package com.hartveld.stream.reactive.swing.app;
 
+import static com.hartveld.stream.reactive.concurrency.Schedulers.defaultScheduler;
 import com.hartveld.stream.reactive.Observable;
-import com.hartveld.stream.reactive.concurrency.Schedulers;
 import com.hartveld.stream.reactive.subjects.TaskSubject;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public class RandomStringsService {
 
 	public Observable<String> retrieveSeveralRandomStrings() {
 		return new TaskSubject<>(
-						Schedulers.DEFAULT,
+						defaultScheduler(),
 						this::executeService
 				)
 				.flatMap(ss -> {

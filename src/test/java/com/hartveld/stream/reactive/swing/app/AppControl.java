@@ -1,9 +1,10 @@
 package com.hartveld.stream.reactive.swing.app;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.hartveld.stream.reactive.concurrency.Schedulers.defaultScheduler;
+import static com.hartveld.stream.reactive.concurrency.Schedulers.eventQueueScheduler;
 
 import com.hartveld.stream.reactive.component.ReactiveListModel;
-import com.hartveld.stream.reactive.concurrency.Schedulers;
 import com.hartveld.stream.reactive.swing.AbstractFrameControl;
 import com.hartveld.stream.reactive.swing.DefaultReactiveListModel;
 import com.hartveld.stream.reactive.swing.ReactiveSwingFrame;
@@ -26,7 +27,7 @@ public class AppControl extends AbstractFrameControl {
 		//frame.setDefaultCloseOperation(AppFrame.EXIT_ON_CLOSE);
 
 		final AutoCloseable subscription = frame.go().clicks()
-				.observeOn(Schedulers.DEFAULT)
+				.observeOn(defaultScheduler())
 				.flatMap(click -> {
 					LOG.trace("Clearing model contents ...");
 					model.clear();
@@ -34,7 +35,7 @@ public class AppControl extends AbstractFrameControl {
 					LOG.trace("Preparing backend service ...");
 					return service.retrieveSeveralRandomStrings();
 				})
-				.observeOn(Schedulers.EDT)
+				.observeOn(eventQueueScheduler())
 				.subscribe(model);
 
 		frame.window().closing()
