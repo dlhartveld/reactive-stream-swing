@@ -15,18 +15,20 @@ public class AppControl extends AbstractFrameControl {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AppControl.class);
 
-	public final AppFrame frame;
+	public final AppFrame appFrame;
 	public final ReactiveListModel<String> model;
 
-	public AppControl(final RandomStringsService service) throws Exception {
+	public AppControl(final AppFrame appFrame, final DefaultReactiveListModel<String> model, final RandomStringsService service) throws Exception {
+		checkNotNull(appFrame, "appFrame");
+		checkNotNull(model, "model");
 		checkNotNull(service, "service");
 
-		this.model = new DefaultReactiveListModel<>();
+		this.model = model;
 
-		this.frame = new AppFrame(model);
+		this.appFrame = appFrame;
 		//frame.setDefaultCloseOperation(AppFrame.EXIT_ON_CLOSE);
 
-		final AutoCloseable subscription = frame.go().clicks()
+		final AutoCloseable subscription = this.appFrame.go().clicks()
 				.observeOn(defaultScheduler())
 				.flatMap(click -> {
 					LOG.trace("Clearing model contents ...");
@@ -38,7 +40,7 @@ public class AppControl extends AbstractFrameControl {
 				.observeOn(eventQueueScheduler())
 				.subscribe(model);
 
-		frame.window().closing()
+		this.appFrame.window().closing()
 				.subscribe(event -> {
 					try {
 						subscription.close();
@@ -47,8 +49,8 @@ public class AppControl extends AbstractFrameControl {
 	}
 
 	@Override
-	public final ReactiveSwingFrame frame() {
-		return this.frame;
+	protected final ReactiveSwingFrame frame() {
+		return this.appFrame;
 	}
 
 }

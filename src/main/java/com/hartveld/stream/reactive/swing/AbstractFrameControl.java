@@ -10,7 +10,7 @@ public abstract class AbstractFrameControl {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AbstractFrameControl.class);
 
-	public abstract ReactiveSwingFrame frame();
+	protected abstract ReactiveSwingFrame frame();
 
 	public void showFrame() throws Exception {
 		LOG.trace("Showing frame ...");

@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import com.hartveld.commons.test.swing.AbstractSwingFrameTest;
 import com.hartveld.stream.reactive.Observable;
 import com.hartveld.stream.reactive.ObservableFactory;
+import com.hartveld.stream.reactive.swing.DefaultReactiveListModel;
 import com.hartveld.stream.reactive.swing.ReactiveSwingButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -28,6 +29,8 @@ public class AppTest extends AbstractSwingFrameTest {
 	private static final String ABC = "abc";
 	private static final String DEF = "def";
 
+	private AppFrame appFrame;
+	private DefaultReactiveListModel<String> model;
 	private AppControl control;
 
 	private ReactiveSwingButton button;
@@ -41,9 +44,11 @@ public class AppTest extends AbstractSwingFrameTest {
 
 		checkState(isEventDispatchThread(), "Not called on EDT");
 
-		this.control = new AppControl(service);
+		this.model = new DefaultReactiveListModel<>();
+		this.appFrame = new AppFrame(model);
+		this.control = new AppControl(appFrame, model, service);
 
-		return this.control.frame();
+		return appFrame;
 	}
 
 	@Override

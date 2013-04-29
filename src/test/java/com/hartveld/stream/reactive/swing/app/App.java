@@ -1,5 +1,6 @@
 package com.hartveld.stream.reactive.swing.app;
 
+import com.hartveld.stream.reactive.swing.DefaultReactiveListModel;
 import javax.swing.JFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,13 @@ public class App {
 
 		final RandomStringsService service = new RandomStringsService();
 
-		final AppControl control = new AppControl(service);
+		final DefaultReactiveListModel<String> model = new DefaultReactiveListModel<>();
+		final AppFrame appFrame = new AppFrame(model);
+		final AppControl control = new AppControl(appFrame, model, service);
+
 		control.showFrame();
 
-		control.frame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		control.frame().window().closing()
 //				.delay(1, TimeUnit.SECONDS)
 //				.subscribe(event -> {
